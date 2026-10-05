@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>許舒禹的作品集 | Course Portfolio</title>
+  <!-- Google Fonts: 圓潤可愛字體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* =========================================================
+       1. 全局變數與重置 (Global Variables & Reset)
+       ========================================================= */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --primary-pink: #ff6b81;
+      --pink-glow: #ff4757;
+      --accent-yellow: #ffa502;
+      --text-color: #57606f;
+      --locked-bg: #eccc68;
+      --locked-gray: #dcdde1;
+      --shadow-soft: 0 10px 25px rgba(255, 107, 129, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      background-size: 200% 200%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: var(--text-color);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 背景動態漸層效果 */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 飄浮心形與愛心裝飾背景 (CSS Shapes) */
+    body::before, body::after {
+      content: "🌸";
+      position: absolute;
+      font-size: 3rem;
+      opacity: 0.4;
+      animation: float 6s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    body::before { top: 10%; left: 8%; animation-delay: 0s; }
+    body::after { bottom: 12%; right: 8%; content: "✨"; animation-delay: 3s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-25px) rotate(15deg); }
+    }
+
+    /* =========================================================
+       2. 主卡片容器 (Main Container)
+       ========================================================= */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 32px;
+      padding: 40px 30px;
+      box-shadow: var(--shadow-soft), inset 0 0 0 3px rgba(255, 255, 255, 0.8);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin: 20px 0;
+    }
+
+    /* =========================================================
+       3. 大頭貼與個人簡介 (Profile Header)
+       ========================================================= */
+    .profile-section {
+      margin-bottom: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 15px;
+    }
+
+    /* 正圓形大頭貼與防變形裁切 (Object-fit & Border-radius) */
+    .avatar-img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%; /* 正圓形 */
+      border: 5px solid #ffffff;
+      box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: block;
+    }
+
+    /* 大頭貼皇冠裝飾 */
+    .avatar-wrapper::after {
+      content: '👑';
+      position: absolute;
+      top: -12px;
+      right: -5px;
+      font-size: 2rem;
+      transform: rotate(20deg);
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+    }
+
+    /* 等級 LV.16 小徽章 */
+    .status-badge {
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ff4757, #ff6b81);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      white-space: nowrap;
+    }
+
+    .avatar-wrapper:hover .avatar-img {
+      transform: scale(1.08) rotate(-3deg);
+    }
+
+    .profile-name {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary-pink);
+      text-shadow: 2px 2px 0px #fff, 0px 0px 10px rgba(255, 107, 129, 0.2);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .profile-bio {
+      font-size: 1rem;
+      color: #747d8c;
+      background: #ffffff;
+      padding: 6px 18px;
+      border-radius: 20px;
+      display: inline-block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-weight: 600;
+    }
+
+    .progress-tag {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ff6b81;
+      background: #ffeaa7;
+      padding: 4px 12px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* =========================================================
+       4. 關卡按鈕網格 (Grid Layout)
+       ========================================================= */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 電腦版 4 列 */
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    /* 響應式排版 (RWD) */
+    @media (max-width: 850px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 平板 2 列 */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 15px;
+      }
+      .grid-container {
+        grid-template-columns: repeat(1, 1fr); /* 手機版 1 列 */
+        gap: 12px;
+      }
+      .profile-name {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* =========================================================
+       5. 按鈕基本卡片與 Hover 動畫 (Button Styles & Animations)
+       ========================================================= */
+    .btn-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      min-height: 85px;
+      border-radius: 20px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    /* --- [已解鎖按鈕樣式] --- */
+    .btn-unlocked {
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      cursor: pointer;
+    }
+
+    .btn-unlocked .btn-title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+    }
+
+    .btn-unlocked .btn-badge {
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* 滑鼠 Hover 動畫 */
+    .btn-unlocked:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(255, 117, 140, 0.4);
+      background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    }
+
+    .btn-unlocked::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transform: rotate(30deg) translateY(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .btn-unlocked:hover::before {
+      transform: rotate(30deg) translateY(100%);
+    }
+
+    /* --- [未解鎖按鈕樣式] --- */
+    .btn-locked {
+      background: #f1f2f6;
+      color: #a4b0be;
+      border: 2px solid #dfe4ea;
+      cursor: not-allowed;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .btn-locked .btn-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .btn-locked .lock-icon {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    /* 未解鎖按鈕 Hover：鎖頭抖動 */
+    .btn-locked:hover {
+      background: #e4e7eb;
+      color: #747d8c;
+    }
+
+    .btn-locked:hover .lock-icon {
+      animation: shake 0.5s ease-in-out infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-12deg); }
+      40% { transform: rotate(12deg); }
+      60% { transform: rotate(-8deg); }
+      80% { transform: rotate(8deg); }
+    }
+
+    /* =========================================================
+       6. 頁尾資訊 (Footer)
+       ========================================================= */
+    .footer {
+      margin-top: 35px;
+      font-size: 0.85rem;
+      color: #a4b0be;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 個人主視覺與大頭貼區塊 -->
+    <header class="profile-section">
+      <div class="avatar-wrapper">
+        <!-- 圓形照片與等級徽章 -->
+        <img class="avatar-img" src="https://i.postimg.cc/sgtc09TH/IMG-9075.jpg" alt="許舒禹的大頭貼">
+        <span class="status-badge">LV. 16</span>
+      </div>
+      <h1 class="profile-name">許舒禹</h1>
+      <p class="profile-bio">✨ Welcome to my Web Design Journey ✨</p>
+      <div class="progress-tag">🎮 闖關進度：2 / 16 關卡</div>
+    </header>
+
+    <!-- 16 個關卡按鈕區塊 -->
+    <main class="grid-container">
+      
+      <!-- 按鈕 1：已解鎖 -->
+      <a href="w1/index.html" class="btn-card btn-unlocked">
+        <span class="btn-badge">WEEK 01</span>
+        <span class="btn-title">Week 1 - 數位名片</span>
+      </a>
+
+      <!-- 按鈕 2：已解鎖 -->
+      <a href="w2/index.html" class="btn-card btn-unlocked">
+        <span class="btn-badge">WEEK 02</span>
+        <span class="btn-title">Week 2 - 今天吃甚麼？</span>
+      </a>
+
+      <!-- 按鈕 3 至 16：未解鎖狀態 (灰色鎖頭) -->
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 3 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 4 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 5 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 6 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 7 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 8 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 9 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 10 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 11 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 12 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 13 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 14 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 15 - 未解鎖</span>
+      </div>
+
+      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
+        <span class="lock-icon">🔒</span>
+        <span class="btn-title">Week 16 - 未解鎖</span>
+      </div>
+
+    </main>
+
+    <!-- 頁尾資訊 -->
+    <footer class="footer">
+      <p>© 2026 Web Design Portfolio | Handcrafted with 💖</p>
+    </footer>
+  </div>
+
+</body>
+</html>
