@@ -1,444 +1,927 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>許舒禹的作品集 | Course Portfolio</title>
-  <!-- Google Fonts: 圓潤可愛字體 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  
-  <style>
-    /* =========================================================
-       1. 全局變數與重置 (Global Variables & Reset)
-       ========================================================= */
-    :root {
-      --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --primary-pink: #ff6b81;
-      --pink-glow: #ff4757;
-      --accent-yellow: #ffa502;
-      --text-color: #57606f;
-      --locked-bg: #eccc68;
-      --locked-gray: #dcdde1;
-      --shadow-soft: 0 10px 25px rgba(255, 107, 129, 0.2);
-    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
 
-    body {
-      font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
-      min-height: 100vh;
-      background: var(--bg-gradient);
-      background-size: 200% 200%;
-      animation: gradientBG 10s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      color: var(--text-color);
-      position: relative;
-      overflow-x: hidden;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    /* 背景動態漸層效果 */
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    <title>Web Dev Quest - 網頁程式作品集入口</title>
 
-    /* 飄浮心形與愛心裝飾背景 (CSS Shapes) */
-    body::before, body::after {
-      content: "🌸";
-      position: absolute;
-      font-size: 3rem;
-      opacity: 0.4;
-      animation: float 6s ease-in-out infinite alternate;
-      z-index: 0;
-    }
-    body::before { top: 10%; left: 8%; animation-delay: 0s; }
-    body::after { bottom: 12%; right: 8%; content: "✨"; animation-delay: 3s; }
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    @keyframes float {
-      0% { transform: translateY(0px) rotate(0deg); }
-      100% { transform: translateY(-25px) rotate(15deg); }
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
 
-    /* =========================================================
-       2. 主卡片容器 (Main Container)
-       ========================================================= */
-    .container {
-      width: 100%;
-      max-width: 900px;
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 32px;
-      padding: 40px 30px;
-      box-shadow: var(--shadow-soft), inset 0 0 0 3px rgba(255, 255, 255, 0.8);
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      margin: 20px 0;
-    }
+    <!-- FontAwesome Icons -->
 
-    /* =========================================================
-       3. 大頭貼與個人簡介 (Profile Header)
-       ========================================================= */
-    .profile-section {
-      margin-bottom: 35px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .avatar-wrapper {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      margin-bottom: 15px;
-    }
+    
 
-    /* 正圓形大頭貼與防變形裁切 (Object-fit & Border-radius) */
-    .avatar-img {
-      width: 130px;
-      height: 130px;
-      object-fit: cover;
-      border-radius: 50%; /* 正圓形 */
-      border: 5px solid #ffffff;
-      box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      display: block;
-    }
+    <style>
 
-    /* 大頭貼皇冠裝飾 */
-    .avatar-wrapper::after {
-      content: '👑';
-      position: absolute;
-      top: -12px;
-      right: -5px;
-      font-size: 2rem;
-      transform: rotate(20deg);
-      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
-    }
+        :root {
 
-    /* 等級 LV.16 小徽章 */
-    .status-badge {
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #ff4757, #ff6b81);
-      color: #ffffff;
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 20px;
-      border: 2px solid #ffffff;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      white-space: nowrap;
-    }
+            --neon-pink: #ff007f;
 
-    .avatar-wrapper:hover .avatar-img {
-      transform: scale(1.08) rotate(-3deg);
-    }
+            --neon-cyan: #00f3ff;
 
-    .profile-name {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--primary-pink);
-      text-shadow: 2px 2px 0px #fff, 0px 0px 10px rgba(255, 107, 129, 0.2);
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
+            --neon-green: #39ff14;
 
-    .profile-bio {
-      font-size: 1rem;
-      color: #747d8c;
-      background: #ffffff;
-      padding: 6px 18px;
-      border-radius: 20px;
-      display: inline-block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      font-weight: 600;
-    }
+            --neon-purple: #9d00ff;
 
-    .progress-tag {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #ff6b81;
-      background: #ffeaa7;
-      padding: 4px 12px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
+            --bg-dark: #0a0a12;
 
-    /* =========================================================
-       4. 關卡按鈕網格 (Grid Layout)
-       ========================================================= */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 電腦版 4 列 */
-      gap: 16px;
-      margin-top: 20px;
-    }
+        }
 
-    /* 響應式排版 (RWD) */
-    @media (max-width: 850px) {
-      .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* 平板 2 列 */
-      }
-    }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 25px 15px;
-      }
-      .grid-container {
-        grid-template-columns: repeat(1, 1fr); /* 手機版 1 列 */
-        gap: 12px;
-      }
-      .profile-name {
-        font-size: 1.8rem;
-      }
-    }
 
-    /* =========================================================
-       5. 按鈕基本卡片與 Hover 動畫 (Button Styles & Animations)
-       ========================================================= */
-    .btn-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-      min-height: 85px;
-      border-radius: 20px;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
+        body {
 
-    /* --- [已解鎖按鈕樣式] --- */
-    .btn-unlocked {
-      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-      color: #ffffff;
-      border: 2px solid #ffffff;
-      cursor: pointer;
-    }
+            font-family: 'Noto Sans TC', 'Orbitron', sans-serif;
 
-    .btn-unlocked .btn-title {
-      font-size: 1rem;
-      font-weight: 700;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-      z-index: 1;
-    }
+            background-color: var(--bg-dark);
 
-    .btn-unlocked .btn-badge {
-      font-size: 0.75rem;
-      background: rgba(255, 255, 255, 0.3);
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-bottom: 5px;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
+            color: #ffffff;
 
-    /* 滑鼠 Hover 動畫 */
-    .btn-unlocked:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 12px 25px rgba(255, 117, 140, 0.4);
-      background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
-    }
+            overflow-x: hidden;
 
-    .btn-unlocked::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        60deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-      );
-      transform: rotate(30deg) translateY(-100%);
-      transition: transform 0.6s ease;
-    }
+            min-height: 100vh;
 
-    .btn-unlocked:hover::before {
-      transform: rotate(30deg) translateY(100%);
-    }
+        }
 
-    /* --- [未解鎖按鈕樣式] --- */
-    .btn-locked {
-      background: #f1f2f6;
-      color: #a4b0be;
-      border: 2px solid #dfe4ea;
-      cursor: not-allowed;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
-    }
 
-    .btn-locked .btn-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
 
-    .btn-locked .lock-icon {
-      font-size: 1.3rem;
-      margin-bottom: 4px;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
+        /* Y2K Dynamic Grid Background */
 
-    /* 未解鎖按鈕 Hover：鎖頭抖動 */
-    .btn-locked:hover {
-      background: #e4e7eb;
-      color: #747d8c;
-    }
+        .cyber-grid {
 
-    .btn-locked:hover .lock-icon {
-      animation: shake 0.5s ease-in-out infinite;
-    }
+            background-image: 
 
-    @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      20% { transform: rotate(-12deg); }
-      40% { transform: rotate(12deg); }
-      60% { transform: rotate(-8deg); }
-      80% { transform: rotate(8deg); }
-    }
+                linear-gradient(to right, rgba(0, 243, 255, 0.08) 1px, transparent 1px),
 
-    /* =========================================================
-       6. 頁尾資訊 (Footer)
-       ========================================================= */
-    .footer {
-      margin-top: 35px;
-      font-size: 0.85rem;
-      color: #a4b0be;
-    }
-  </style>
+                linear-gradient(to bottom, rgba(255, 0, 127, 0.08) 1px, transparent 1px);
+
+            background-size: 40px 40px;
+
+            animation: gridMove 20s linear infinite;
+
+        }
+
+
+
+        @keyframes gridMove {
+
+            0% { background-position: 0 0; }
+
+            100% { background-position: 40px 40px; }
+
+        }
+
+
+
+        /* Glowing Scanline effect */
+
+        .scanline {
+
+            background: linear-gradient(
+
+                to bottom,
+
+                rgba(255,255,255,0),
+
+                rgba(255,255,255,0) 50%,
+
+                rgba(0, 243, 255, 0.2) 50%,
+
+                rgba(0, 243, 255, 0.2)
+
+            );
+
+            background-size: 100% 4px;
+
+        }
+
+
+
+        /* Glassmorphism Styles */
+
+        .glass-card {
+
+            background: rgba(18, 18, 30, 0.65);
+
+            backdrop-filter: blur(16px);
+
+            -webkit-backdrop-filter: blur(16px);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+        }
+
+
+
+        .glass-card-unlocked {
+
+            background: rgba(22, 27, 46, 0.75);
+
+            backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(0, 243, 255, 0.4);
+
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        }
+
+
+
+        .glass-card-unlocked:hover {
+
+            transform: translateY(-6px) scale(1.02);
+
+            border-color: var(--neon-pink);
+
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.5), inset 0 0 10px rgba(255, 0, 127, 0.3);
+
+        }
+
+
+
+        .glass-card-locked {
+
+            background: rgba(15, 15, 20, 0.4);
+
+            backdrop-filter: blur(6px);
+
+            border: 1px solid rgba(255, 255, 255, 0.05);
+
+            cursor: not-allowed;
+
+            opacity: 0.6;
+
+            filter: grayscale(80%);
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .glass-card-locked:hover {
+
+            opacity: 0.8;
+
+            border-color: rgba(255, 0, 85, 0.4);
+
+            filter: grayscale(50%);
+
+        }
+
+
+
+        /* Hologram Avatar Border */
+
+        .avatar-frame {
+
+            position: relative;
+
+            border-radius: 50%;
+
+            padding: 5px;
+
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan), var(--neon-green), var(--neon-purple));
+
+            background-size: 300% 300%;
+
+            animation: gradientBorder 6s ease infinite;
+
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+
+        }
+
+
+
+        @keyframes gradientBorder {
+
+            0% { background-position: 0% 50%; }
+
+            50% { background-position: 100% 50%; }
+
+            100% { background-position: 0% 50%; }
+
+        }
+
+
+
+        /* Y2K Text Glow */
+
+        .text-glow-cyan {
+
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.4);
+
+        }
+
+
+
+        .text-glow-pink {
+
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.7), 0 0 20px rgba(255, 0, 127, 0.4);
+
+        }
+
+
+
+        /* Cyber Button Badge */
+
+        .cyber-badge {
+
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+
+        }
+
+    </style>
+
 </head>
-<body>
 
-  <div class="container">
-    <!-- 個人主視覺與大頭貼區塊 -->
-    <header class="profile-section">
-      <div class="avatar-wrapper">
-        <!-- 圓形照片與等級徽章 -->
-        <img class="avatar-img" src="https://i.postimg.cc/sgtc09TH/IMG-9075.jpg" alt="許舒禹的大頭貼">
-        <span class="status-badge">LV. 16</span>
-      </div>
-      <h1 class="profile-name">許舒禹</h1>
-      <p class="profile-bio">✨ Welcome to my Web Design Journey ✨</p>
-      <div class="progress-tag">🎮 闖關進度：2 / 16 關卡</div>
-    </header>
+<body class="cyber-grid scanline relative flex flex-col items-center justify-between p-4 sm:p-8 min-h-screen">
 
-    <!-- 16 個關卡按鈕區塊 -->
-    <main class="grid-container">
-      
-      <!-- 按鈕 1：已解鎖 -->
-      <a href="w1/index.html" class="btn-card btn-unlocked">
-        <span class="btn-badge">WEEK 01</span>
-        <span class="btn-title">Week 1 - 數位名片</span>
-      </a>
 
-      <!-- 按鈕 2：已解鎖 -->
-      <a href="w2/index.html" class="btn-card btn-unlocked">
-        <span class="btn-badge">WEEK 02</span>
-        <span class="btn-title">Week 2 - 今天吃甚麼？</span>
-      </a>
 
-      <!-- 按鈕 3 至 16：未解鎖狀態 (灰色鎖頭) -->
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 3 - 未解鎖</span>
-      </div>
+    <!-- Ambient Glowing Orbs -->
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 4 - 未解鎖</span>
-      </div>
+    <div class="fixed top-1/4 left-10 w-72 h-72 bg-pink-600/20 rounded-full filter blur-[100px] pointer-events-none"></div>
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 5 - 未解鎖</span>
-      </div>
+    <div class="fixed bottom-1/4 right-10 w-80 h-80 bg-cyan-500/20 rounded-full filter blur-[100px] pointer-events-none"></div>
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 6 - 未解鎖</span>
-      </div>
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 7 - 未解鎖</span>
-      </div>
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 8 - 未解鎖</span>
-      </div>
+    <!-- MAIN CONTAINER -->
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 9 - 未解鎖</span>
-      </div>
+    <div class="w-full max-w-6xl z-10 flex flex-col items-center">
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 10 - 未解鎖</span>
-      </div>
+        
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 11 - 未解鎖</span>
-      </div>
+        <!-- HEADER / PROFILE SECTION -->
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 12 - 未解鎖</span>
-      </div>
+        <header class="w-full glass-card rounded-2xl p-6 sm:p-8 mb-8 text-center relative overflow-hidden flex flex-col items-center">
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 13 - 未解鎖</span>
-      </div>
+            
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 14 - 未解鎖</span>
-      </div>
+            <!-- Top Status Bar -->
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 15 - 未解鎖</span>
-      </div>
+            <div class="w-full flex flex-wrap justify-between items-center text-xs sm:text-sm text-cyan-400 font-mono mb-6 border-b border-cyan-500/20 pb-3 gap-2">
 
-      <div class="btn-card btn-locked" onclick="alert('🔒 此關卡尚未解鎖，請繼續加油！')">
-        <span class="lock-icon">🔒</span>
-        <span class="btn-title">Week 16 - 未解鎖</span>
-      </div>
+                <div class="flex items-center gap-2">
 
-    </main>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
 
-    <!-- 頁尾資訊 -->
-    <footer class="footer">
-      <p>© 2026 Web Design Portfolio | Handcrafted with 💖</p>
-    </footer>
-  </div>
+                    <span>STATUS: <strong class="text-green-400">ONLINE</strong></span>
+
+                </div>
+
+                <div class="tracking-widest">
+
+                    <span>PLAYER: <strong class="text-pink-400">DEV_HERO#2026</strong></span>
+
+                </div>
+
+                <div>
+
+                    <span>QUEST PROGRESS: <strong class="text-yellow-400">2 / 16 (12.5%)</strong></span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Profile Picture with Holographic Effect -->
+
+            <div class="avatar-frame mb-4 w-28 h-28 sm:w-36 sm:h-36">
+
+                <img 
+
+                    src="https://placehold.co/200x200/121220/00f3ff?text=Y2K+AVATAR" 
+
+                    alt="User Avatar" 
+
+                    class="w-full h-full rounded-full object-cover border-2 border-black"
+
+                />
+
+            </div>
+
+
+
+            <!-- Name and Title -->
+
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-wider text-white text-glow-cyan font-['Orbitron'] mb-2">
+
+                ALEX <span class="text-pink-500">DEV</span>
+
+            </h1>
+
+            <p class="text-sm sm:text-base text-gray-300 font-mono tracking-widest bg-cyan-950/60 border border-cyan-500/30 px-4 py-1.5 rounded-full inline-block">
+
+                ⚡ 網頁程式設計作品集入口 ⚡
+
+            </p>
+
+
+
+            <!-- Level Progress Bar -->
+
+            <div class="w-full max-w-md mt-6">
+
+                <div class="flex justify-between text-xs text-gray-400 font-mono mb-1">
+
+                    <span>LEVEL 2 EXP</span>
+
+                    <span>12.5% COMPLETE</span>
+
+                </div>
+
+                <div class="w-full h-3 bg-gray-900/80 rounded-full border border-cyan-500/30 p-0.5 overflow-hidden">
+
+                    <div class="h-full bg-gradient-to-r from-cyan-400 to-pink-500 rounded-full w-[12.5%] transition-all duration-1000 shadow-[0_0_10px_#00f3ff]"></div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- GRID SECTION (16 BUTTONS) -->
+
+        <main class="w-full">
+
+            <h2 class="text-xl sm:text-2xl font-bold font-['Orbitron'] text-pink-400 text-glow-pink mb-6 flex items-center gap-2">
+
+                <i class="fa-solid fa-gamepad"></i> MISSION SELECT / 任務選擇區
+
+            </h2>
+
+
+
+            <!-- Responsive Grid: 1 col on mobile, 2 cols on sm, 4 cols on lg -->
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+                
+
+                <!-- Week 1 - Unlocked -->
+
+                <a href="w1/index.html" class="glass-card-unlocked rounded-xl p-5 relative overflow-hidden group flex flex-col justify-between h-40">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-cyan-500 text-black font-extrabold px-3 py-1 text-xs tracking-wider">
+
+                            WEEK 01
+
+                        </span>
+
+                        <span class="text-green-400 text-xs font-mono flex items-center gap-1">
+
+                            <i class="fa-solid fa-lock-open"></i> UNLOCKED
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+
+                            Week 1 - 數位名片
+
+                        </h3>
+
+                        <p class="text-xs text-gray-400 mt-1">個人簡介與個人品牌呈現</p>
+
+                    </div>
+
+                    <div class="flex justify-end items-center text-cyan-400 text-xs font-mono group-hover:translate-x-1 transition-transform">
+
+                        <span>LAUNCH MISSION</span> <i class="fa-solid fa-arrow-right ml-1"></i>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- Week 2 - Unlocked -->
+
+                <a href="w2/index.html" class="glass-card-unlocked rounded-xl p-5 relative overflow-hidden group flex flex-col justify-between h-40">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-pink-500 text-white font-extrabold px-3 py-1 text-xs tracking-wider">
+
+                            WEEK 02
+
+                        </span>
+
+                        <span class="text-green-400 text-xs font-mono flex items-center gap-1">
+
+                            <i class="fa-solid fa-lock-open"></i> UNLOCKED
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-lg font-bold text-white group-hover:text-pink-300 transition-colors">
+
+                            Week 2 - 今天吃甚麼?
+
+                        </h3>
+
+                        <p class="text-xs text-gray-400 mt-1">隨機美食抽籤互動網頁</p>
+
+                    </div>
+
+                    <div class="flex justify-end items-center text-pink-400 text-xs font-mono group-hover:translate-x-1 transition-transform">
+
+                        <span>LAUNCH MISSION</span> <i class="fa-solid fa-arrow-right ml-1"></i>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- Locked Buttons Generator: Week 3 to 16 -->
+
+                <!-- Week 3 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 03</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 3 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 4 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 04</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 4 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 5 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 05</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 5 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 6 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 06</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 6 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 7 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 07</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 7 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 8 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 08</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 8 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 9 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 09</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 9 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 10 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 10</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 10 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 11 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 11</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 11 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 12 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 12</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 12 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 13 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 13</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 13 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 14 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 14</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 14 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 15 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 15</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 15 - 尚未解鎖 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
+
+                </div>
+
+
+
+                <!-- Week 16 -->
+
+                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+
+                    <div class="flex justify-between items-start">
+
+                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 16</span>
+
+                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-base font-bold text-gray-400">Week 16 - 期末總專案 🔒</h3>
+
+                        <p class="text-xs text-gray-600 mt-1">最終 Boss 關卡</p>
+
+                    </div>
+
+                    <div class="text-xs text-gray-600 font-mono">FINAL QUEST</div>
+
+                </div>
+
+
+
+            </div>
+
+        </main>
+
+
+
+        <!-- FOOTER -->
+
+        <footer class="mt-12 text-center text-xs text-gray-500 font-mono">
+
+            <p>© 2026 WEB PROGRAMMING COURSE PORTFOLIO | Y2K NEON SYSTEM v2.0</p>
+
+            <p class="mt-1 text-gray-600">DESIGNED WITH TAILWIND CSS & NEON GLASSMORPHISM</p>
+
+        </footer>
+
+    </div>
+
+
+
+    <!-- Interactive Toast Message for Locked Items -->
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-red-950/90 border border-red-500 text-red-200 px-4 py-3 rounded-lg shadow-lg backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 font-mono text-sm z-50 flex items-center gap-2">
+
+        <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+
+        <span id="toast-msg">存取拒絕：該章節關卡尚未解鎖！</span>
+
+    </div>
+
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const lockedCards = document.querySelectorAll('.glass-card-locked');
+
+            const toast = document.getElementById('toast');
+
+            let toastTimeout;
+
+
+
+            // Show glitch warning toast when user clicks locked level
+
+            lockedCards.forEach(card => {
+
+                card.addEventListener('click', () => {
+
+                    clearTimeout(toastTimeout);
+
+                    toast.classList.remove('opacity-0');
+
+                    toast.classList.add('opacity-100');
+
+
+
+                    // Audio feedback (synthetic beep using Web Audio API)
+
+                    try {
+
+                        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+                        const osc = ctx.createOscillator();
+
+                        osc.type = 'sawtooth';
+
+                        osc.frequency.setValueAtTime(150, ctx.currentTime);
+
+                        osc.connect(ctx.destination);
+
+                        osc.start();
+
+                        osc.stop(ctx.currentTime + 0.1);
+
+                    } catch (e) {}
+
+
+
+                    toastTimeout = setTimeout(() => {
+
+                        toast.classList.remove('opacity-100');
+
+                        toast.classList.add('opacity-0');
+
+                    }, 2500);
+
+                });
+
+            });
+
+        });
+
+    </script>
 
 </body>
+
 </html>
