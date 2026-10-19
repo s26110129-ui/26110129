@@ -1,20 +1,4 @@
-
-<!-- do not change the markup -->
-<a href="#">
-  Checkout
-</a>
-
-<!-- 
-1. make look like a button
-2. change text color red on hover
-
-Cannot change html, only css.
-Look closely at
--->  
-
-<div></div>
-<div></div>
-<div></div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -161,14 +145,14 @@ Look closely at
                     <span>PLAYER: <strong class="text-pink-400">DEV_HERO#2026</strong></span>
                 </div>
                 <div>
-                    <span>QUEST PROGRESS: <strong class="text-yellow-400">3 / 16 (18.75%)</strong></span>
+                    <span>QUEST PROGRESS: <strong class="text-yellow-400">4 / 16 (25.0%)</strong></span>
                 </div>
             </div>
 
             <!-- Profile Picture with Holographic Effect -->
             <div class="avatar-frame mb-4 w-28 h-28 sm:w-36 sm:h-36">
                 <img 
-                    src="https://i.postimg.cc/1Rg4p99M/IMG-4406.jpg" 
+                    src="https://placehold.co/200x200/121220/00f3ff?text=Y2K+AVATAR" 
                     alt="User Avatar" 
                     class="w-full h-full rounded-full object-cover border-2 border-black"
                 />
@@ -176,7 +160,7 @@ Look closely at
 
             <!-- Name and Title -->
             <h1 class="text-3xl sm:text-5xl font-extrabold tracking-wider text-white text-glow-cyan font-['Orbitron'] mb-2">
-                 <span class="text-pink-500">許舒禹</span>
+                ALEX <span class="text-pink-500">DEV</span>
             </h1>
             <p class="text-sm sm:text-base text-gray-300 font-mono tracking-widest bg-cyan-950/60 border border-cyan-500/30 px-4 py-1.5 rounded-full inline-block">
                 ⚡ 網頁程式設計作品集入口 ⚡
@@ -185,11 +169,11 @@ Look closely at
             <!-- Level Progress Bar -->
             <div class="w-full max-w-md mt-6">
                 <div class="flex justify-between text-xs text-gray-400 font-mono mb-1">
-                    <span>LEVEL 3 EXP</span>
-                    <span>18.75% COMPLETE</span>
+                    <span>LEVEL 4 EXP</span>
+                    <span>25.0% COMPLETE</span>
                 </div>
                 <div class="w-full h-3 bg-gray-900/80 rounded-full border border-cyan-500/30 p-0.5 overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-cyan-400 to-pink-500 rounded-full w-[18.75%] transition-all duration-1000 shadow-[0_0_10px_#00f3ff]"></div>
+                    <div class="h-full bg-gradient-to-r from-cyan-400 to-pink-500 rounded-full w-[25.0%] transition-all duration-1000 shadow-[0_0_10px_#00f3ff]"></div>
                 </div>
             </div>
         </header>
@@ -266,20 +250,28 @@ Look closely at
                     </div>
                 </a>
 
-                <!-- Locked Buttons Generator: Week 4 to 16 -->
-                <!-- Week 4 -->
-                <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
+                <!-- Week 4 - Unlocked -->
+                <a href="w4/index.html" class="glass-card-unlocked rounded-xl p-5 relative overflow-hidden group flex flex-col justify-between h-40">
                     <div class="flex justify-between items-start">
-                        <span class="cyber-badge bg-gray-800 text-gray-400 font-bold px-3 py-1 text-xs">WEEK 04</span>
-                        <span class="text-red-400 text-xs font-mono">🔒 LOCKED</span>
+                        <span class="cyber-badge bg-green-500 text-black font-extrabold px-3 py-1 text-xs tracking-wider">
+                            WEEK 04
+                        </span>
+                        <span class="text-green-400 text-xs font-mono flex items-center gap-1">
+                            <i class="fa-solid fa-lock-open"></i> UNLOCKED
+                        </span>
                     </div>
                     <div>
-                        <h3 class="text-base font-bold text-gray-400">Week 4 - 尚未解鎖 🔒</h3>
-                        <p class="text-xs text-gray-600 mt-1">未知任務等級</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-green-300 transition-colors">
+                            Week 4 - 悄悄話
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-1">匿名留言與即時互動</p>
                     </div>
-                    <div class="text-xs text-gray-600 font-mono">RESTRICTED AREA</div>
-                </div>
+                    <div class="flex justify-end items-center text-green-400 text-xs font-mono group-hover:translate-x-1 transition-transform">
+                        <span>LAUNCH MISSION</span> <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </div>
+                </a>
 
+                <!-- Locked Buttons Generator: Week 5 to 16 -->
                 <!-- Week 5 -->
                 <div class="glass-card-locked rounded-xl p-5 flex flex-col justify-between h-40 select-none">
                     <div class="flex justify-between items-start">
