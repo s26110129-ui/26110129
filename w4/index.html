@@ -3,36 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>溫柔留言板 - 朋友對我的悄悄話</title>
+  <title>✨ 朋友對我的動態留言板 ✨</title>
   
-  <!-- 引入 Google Fonts 提升字體質感 -->
+  <!-- 引入 Google 可愛圓潤字型 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       【顏色與全域變數設定】
-       若想更換整體配色，可直接修改以下 CSS 變數：
-       ========================================================================== */
+    /* ==========================================
+       1. 全局變數與可愛風主題設定
+       ========================================== */
     :root {
-      /* 背景色：暖灰柔和粉漸層 */
-      --bg-gradient-start: #fbf7f5;
-      --bg-gradient-end: #f4eae6;
-      
-      /* 文字顏色 */
-      --text-main: #5a524e;       /* 主文字：深溫暖灰 */
-      --text-muted: #8c827a;      /* 次要文字：中溫暖灰 */
-      --text-accent: #c88a75;     /* 強調文字：柔和粉橘 */
-
-      /* 卡片樣式 */
-      --card-bg: rgba(255, 255, 255, 0.75); /* 毛玻璃半透明白 */
-      --card-border: rgba(255, 255, 255, 0.9);
-      --card-shadow: 0 8px 24px rgba(180, 160, 150, 0.08);
-
-      /* 高亮輪播特效 (Highlight) 顏色設定 */
-      --highlight-border: #e8a87c;                     /* 高亮卡片邊框色 */
-      --highlight-shadow: 0 12px 32px rgba(232, 168, 124, 0.35); /* 高亮發光效果 */
+      --bg-color: #fff9fb;
+      --primary: #ff6b8b;
+      --primary-hover: #ff4770;
+      --secondary: #ffd166;
+      --accent: #4ecdc4;
+      --text-dark: #4a4e69;
+      --card-shadow: 0 10px 25px rgba(255, 107, 139, 0.12);
+      --font-family: 'Zen Maru Gothic', 'Fredoka', cursive, sans-serif;
     }
 
     * {
@@ -42,77 +32,117 @@
     }
 
     body {
-      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-      color: var(--text-main);
+      background-color: var(--bg-color);
+      font-family: var(--font-family);
+      color: var(--text-dark);
       min-height: 100vh;
-      padding: 40px 20px;
-      line-height: 1.6;
+      padding: 2.5rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+      /* 可愛粉嫩點點背景 */
+      background-image: 
+        radial-gradient(#ffccd5 18%, transparent 19%),
+        radial-gradient(#b8c0ff 18%, transparent 19%);
+      background-size: 50px 50px;
+      background-position: 0 0, 25px 25px;
     }
 
-    /* 頁頭標題區 */
+    /* 漂浮動態氣球 */
+    .balloon {
+      position: fixed;
+      border-radius: 50%;
+      opacity: 0.35;
+      animation: float 10s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .balloon:nth-child(1) { width: 100px; height: 100px; background: #ffb3c1; top: 12%; left: 6%; animation-delay: 0s; }
+    .balloon:nth-child(2) { width: 70px; height: 70px; background: #b8c0ff; top: 65%; left: 88%; animation-delay: -3s; }
+    .balloon:nth-child(3) { width: 90px; height: 90px; background: #ffd166; top: 78%; left: 8%; animation-delay: -6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(8deg); }
+    }
+
+    /* ==========================================
+       2. 頁首標題區塊
+       ========================================== */
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
     }
 
     header h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--text-main);
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-
-    header p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--primary);
+      display: inline-block;
+      padding: 0.6rem 2rem;
+      background: #ffffff;
+      border-radius: 50px;
+      border: 3px dashed var(--primary);
+      box-shadow: 0 8px 20px rgba(255, 107, 139, 0.15);
       letter-spacing: 1px;
     }
 
-    /* ==========================================================================
-       【載入中動畫樣式 (Loading Animation)】
-       ========================================================================== */
-    #loading {
+    header p {
+      margin-top: 0.8rem;
+      font-size: 1.05rem;
+      color: #7d8597;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 0.8rem;
+      background: linear-gradient(135deg, var(--secondary), #ffb703);
+      color: #fff;
+      font-weight: 700;
+      padding: 0.3rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(255, 183, 3, 0.3);
+    }
+
+    /* ==========================================
+       3. 酷炫『讀取留言中...』動畫
+       ========================================== */
+    .loading-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 60px 0;
-    }
-
-    /* 酷炫柔光旋轉波紋動畫 */
-    .spinner-wrapper {
+      padding: 5rem 1rem;
       position: relative;
-      width: 60px;
-      height: 60px;
-      margin-bottom: 20px;
+      z-index: 1;
     }
 
-    .spinner-ring {
+    .loader-box {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loader-ring {
       position: absolute;
       width: 100%;
       height: 100%;
+      border: 6px solid #ffe5ec;
+      border-top: 6px solid var(--primary);
+      border-right: 6px solid var(--accent);
       border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: var(--text-accent);
-      animation: spin 1.5s linear infinite;
+      animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
     }
 
-    .spinner-ring:nth-child(2) {
-      width: 80%;
-      height: 80%;
-      top: 10%;
-      left: 10%;
-      border-top-color: var(--highlight-border);
-      animation: spin 1s linear reverse infinite;
-    }
-
-    .loading-text {
-      font-size: 1.05rem;
-      color: var(--text-accent);
-      letter-spacing: 2px;
-      animation: pulse 1.5s ease-in-out infinite;
+    .loader-icon {
+      font-size: 2.5rem;
+      animation: bounce 0.8s ease-in-out infinite alternate;
     }
 
     @keyframes spin {
@@ -120,209 +150,351 @@
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+    @keyframes bounce {
+      0% { transform: scale(0.85) translateY(0); }
+      100% { transform: scale(1.15) translateY(-6px); }
     }
 
-    /* ==========================================================================
-       【瀑布流 Layout (Masonry Layout)】
-       ========================================================================== */
+    .loading-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+      animation: pulseText 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.6; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-4px); }
+    }
+
+    /* ==========================================
+       4. 瀑布流 Layout (Masonry Layout)
+       ========================================== */
     .masonry-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      /* 預設大螢幕顯示 3 欄 */
       column-count: 3;
-      column-gap: 24px;
+      column-gap: 1.5rem;
+      max-width: 1150px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: none; /* 讀取完成後才會顯示 */
     }
 
-    /* 響應式調整欄數 */
+    /* 響應式斷點設定 */
     @media (max-width: 900px) {
       .masonry-container { column-count: 2; }
     }
-
     @media (max-width: 600px) {
       .masonry-container { column-count: 1; }
     }
 
-    /* ==========================================================================
-       【留言卡片樣式與微動畫】
-       ========================================================================== */
+    /* 留言卡片樣式 */
     .card {
-      break-inside: avoid; /* 防止卡片被瀑布流截斷 */
-      margin-bottom: 24px;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px); /* 毛玻璃質感 */
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 24px;
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.4rem;
       box-shadow: var(--card-shadow);
-      
-      /* 轉場動畫：控制變大、變暗、變模糊的滑順度 */
-      transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      border: 3px solid #ffffff;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
-      opacity: 0.85;
-      transform: scale(0.98);
+      cursor: pointer;
+      overflow: hidden;
     }
 
-    /* 卡片頭部：名字與時間 */
+    .card:hover {
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: 0 16px 32px rgba(255, 107, 139, 0.22);
+    }
+
+    /* 卡片可愛貼紙裝飾 */
+    .card::after {
+      content: '✨';
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 1.1rem;
+      opacity: 0.6;
+    }
+
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      border-bottom: 1px dashed rgba(140, 130, 122, 0.15);
-      padding-bottom: 8px;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px dashed rgba(0,0,0,0.06);
+      padding-bottom: 0.6rem;
     }
 
-    .card-author {
-      font-weight: 500;
-      font-size: 1.05rem;
-      color: var(--text-accent);
+    .author-wrapper {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 0.6rem;
     }
 
-    .card-time {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.08);
     }
 
-    /* 卡片內容：悄悄話 */
-    .card-content {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      white-space: pre-wrap; /* 保留留言中的換行 */
+    .author-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+
+    .whisper-tag {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-weight: 700;
+      background: #f0e6ff;
+      color: #8338ec;
+    }
+
+    .card-body {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #333333;
+      white-space: pre-wrap;
       word-break: break-word;
+      margin-bottom: 0.8rem;
     }
 
-    /* ==========================================================================
-       【重點特效：高亮 (Highlight) & 未被選中 (Dimmed) 狀態】
-       ========================================================================== */
-    
-    /* 當卡片被輪播選中時的高亮樣式 */
-    .card.highlight {
-      opacity: 1;
-      transform: scale(1.05); /* 放大 */
-      border-color: var(--highlight-border);
-      box-shadow: var(--highlight-shadow);
-      z-index: 10; /* 確保高亮卡片浮在最上層 */
-      background: rgba(255, 255, 255, 0.95);
+    .card-footer {
+      font-size: 0.78rem;
+      color: #a0aab2;
+      text-align: right;
     }
 
-    /* 當有卡片高亮時，其他沒被選中的卡片樣式 */
-    .masonry-container.has-highlight .card:not(.highlight) {
-      opacity: 0.4;          /* 稍微變暗 */
-      filter: blur(1.5px);    /* 稍微變模糊 */
-      transform: scale(0.95); /* 微微縮小 */
+    /* 錯誤提醒樣式 */
+    .error-box {
+      text-align: center;
+      background: #fff0f0;
+      color: #e63946;
+      padding: 1.2rem;
+      border-radius: 16px;
+      border: 2px solid #ffb4b4;
+      max-width: 480px;
+      margin: 2rem auto;
+    }
+
+    /* 點擊爆發愛心粒子特效 */
+    .heart-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 1.4rem;
+      animation: particleBurst 0.8s ease-out forwards;
+    }
+
+    @keyframes particleBurst {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.4);
+      }
+      50% {
+        transform: translate(calc(-50% + var(--vx)), calc(-50% + var(--vy))) scale(1.2);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--vx) * 1.4), calc(-50% + var(--vy) * 1.4 - 15px)) scale(0.7);
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- 背景漂浮氣球 -->
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <!-- 頁頭區塊 -->
   <header>
-    <h1>溫柔地對待別人</h1>
-    <p>來自朋友們的悄悄話與祝福牆</p>
+    <h1>💌 朋友對我的動態留言板</h1>
+    <p>溫柔與滿滿祝福的悄悄話牆，點擊卡片有小驚喜喔！</p>
+    <div id="statsBadge" class="badge" style="display: none;">載入中...</div>
   </header>
 
-  <!-- 讀取中動畫區塊 -->
-  <div id="loading">
-    <div class="spinner-wrapper">
-      <div class="spinner-ring"></div>
-      <div class="spinner-ring"></div>
+  <!-- 酷炫『讀取留言中...』動畫 -->
+  <div id="loading" class="loading-container">
+    <div class="loader-box">
+      <div class="loader-ring"></div>
+      <div class="loader-icon">💖</div>
     </div>
     <div class="loading-text">讀取留言中...</div>
   </div>
 
-  <!-- 留言卡片瀑布流容器 -->
-  <main class="masonry-container" id="cardContainer"></main>
+  <!-- 留言卡片瀑布流牆 -->
+  <main id="masonryContainer" class="masonry-container"></main>
 
   <script>
-    // ==========================================================================
-    // 【參數設定區】可自由調整輪播秒數與資料來源
-    // ==========================================================================
-    const CONFIG = {
-      // CSV 資料來源網址
-      csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vStxYKfYlxF4a30fmk4uL9bqYZS2-6aF_p9BB0RVVz_KuKhPvFjAVoP1ok_jASUPJUgVgetLvjHyWiZ/pub?output=csv',
-      
-      // 輪播切換間隔時間 (毫秒)：3000ms = 3 秒
-      carouselInterval: 3000 
-    };
+    // Google 試算表 CSV 網址
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRztjuVHBEuufY8e1a0x4hxXY_SK4diBReBzxHbVjSnh85wR7H-qScvcrqHC39i6gIGNP2d0PPdGZlA/pub?output=csv';
 
-    let messages = [];         // 儲存解析後的留言陣列
-    let currentIndex = 0;      // 當前高亮的卡片索引
-    let carouselTimer = null;  // 計時器物件
+    // 可愛風馬卡龍卡片背景色
+    const softColors = [
+      '#FFF0F5', '#F0F8FF', '#F5FFFA', '#FFFDE7',
+      '#F3E5F5', '#E8F5E9', '#FFF3E0', '#E0F7FA'
+    ];
 
-    // ==========================================================================
-    // 1. CSV 解析函數 (防範留言內含有逗號與雙引號的情形)
-    // ==========================================================================
+    // 可愛頭像 Emoji
+    const avatars = ['🐱', '🐰', '🐻', '🦊', '🐣', '🦄', '🐶', '🐼', '🐨', '🍓', '🌸', '🎀'];
+
+    /**
+     * CSV 解析器：可正確處理含雙引號與逗號 (Commas) 的留言內容
+     */
     function parseCSV(text) {
-      const lines = text.trim().split(/\r\n|\n/);
       const result = [];
+      let row = [];
+      let cur = '';
+      let inQuotes = false;
 
-      // 從第 1 列開始（跳過第 0 列的標題列）
-      for (let i = 1; i < lines.length; i++) {
-        const line = lines[i];
-        if (!line) continue;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        const next = text[i + 1];
 
-        // 正則表達式匹配：處理被雙引號包覆的欄位與常規欄位
-        const row = [];
-        let insideQuote = false;
-        let entry = '';
-
-        for (let charIndex = 0; charIndex < line.length; charIndex++) {
-          const char = line[charIndex];
-
-          if (char === '"') {
-            insideQuote = !insideQuote; // 切換引號狀態
-          } else if (char === ',' && !insideQuote) {
-            row.push(entry.trim());     // 遇到非引號內的逗號，切割欄位
-            entry = '';
+        if (c === '"') {
+          if (inQuotes && next === '"') {
+            cur += '"';
+            i++; // 跳過轉義引號
           } else {
-            entry += char;
+            inQuotes = !inQuotes; // 切換雙引號包覆狀態
           }
-        }
-        row.push(entry.trim());
-
-        // 預設欄位：[0]時間戳記, [1]名字, [2]悄悄話
-        if (row.length >= 3) {
-          result.push({
-            timestamp: row[0].replace(/^"|"$/g, ''), // 移除外圍雙引號
-            name: row[1].replace(/^"|"$/g, '') || '無名氏',
-            content: row[2].replace(/^"|"$/g, '')
-          });
+        } else if (c === ',' && !inQuotes) {
+          row.push(cur.trim());
+          cur = '';
+        } else if ((c === '\r' || c === '\n') && !inQuotes) {
+          if (c === '\r' && next === '\n') {
+            i++; // 處理 \r\n 換行
+          }
+          row.push(cur.trim());
+          if (row.length > 1 || row[0] !== '') {
+            result.push(row);
+          }
+          row = [];
+          cur = '';
+        } else {
+          cur += c;
         }
       }
+
+      if (cur || row.length > 0) {
+        row.push(cur.trim());
+        result.push(row);
+      }
+
       return result;
     }
 
-    // ==========================================================================
-    // 2. 畫面上繪製留言卡片
-    // ==========================================================================
-    function renderCards(data) {
-      const container = document.getElementById('cardContainer');
-      container.innerHTML = ''; // 清空容器
-
-      data.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.dataset.index = index; // 記錄索引值方便輪播對應
-
-        card.innerHTML = `
-          <div class="card-header">
-            <span class="card-author">🌸 ${escapeHTML(item.name)}</span>
-            <span class="card-time">${escapeHTML(item.timestamp.split(' ')[0] || '')}</span>
-          </div>
-          <div class="card-content">${escapeHTML(item.content)}</div>
-        `;
-
-        container.appendChild(card);
-      });
+    /**
+     * 時間格式化
+     */
+    function formatTime(timeStr) {
+      if (!timeStr) return '';
+      const date = new Date(timeStr);
+      if (isNaN(date.getTime())) return timeStr; // 若非標準日期格式，直接返回原字串
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     }
 
-    // 防範 XSS 攻擊的簡單轉義函數
+    /**
+     * 讀取並動態生成卡片
+     */
+    async function fetchMessages() {
+      const loadingEl = document.getElementById('loading');
+      const containerEl = document.getElementById('masonryContainer');
+      const statsBadgeEl = document.getElementById('statsBadge');
+
+      try {
+        const response = await fetch(CSV_URL);
+        if (!response.ok) {
+          throw new Error(`連線失敗 (HTTP ${response.status})`);
+        }
+
+        const csvText = await response.text();
+        const parsedRows = parseCSV(csvText);
+
+        // 檢查是否有留言（扣除第 0 列標題列）
+        if (parsedRows.length <= 1) {
+          loadingEl.innerHTML = `<div class="error-box">目前還沒有任何留言喔！</div>`;
+          return;
+        }
+
+        // 跳過標題列 (時間戳記, 名字, 悄悄話...)
+        const dataRows = parsedRows.slice(1);
+
+        // 整理留言資料結構
+        const messages = dataRows.map(row => {
+          // 清理可能包覆的外圍引號
+          const clean = (str) => str ? str.replace(/^"|"$/g, '') : '';
+          return {
+            timestamp: clean(row[0]),
+            name: clean(row[1]) || '匿名好友',
+            content: clean(row[2]) || '（留下了滿滿的心意...）'
+          };
+        });
+
+        // 動態生成卡片 DOM
+        containerEl.innerHTML = '';
+        messages.forEach((msg, index) => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          
+          // 隨機背景色與頭像
+          const bg = softColors[index % softColors.length];
+          const avatar = avatars[Math.floor(Math.random() * avatars.length)];
+          card.style.backgroundColor = bg;
+
+          card.innerHTML = `
+            <div class="card-header">
+              <div class="author-wrapper">
+                <div class="avatar">${avatar}</div>
+                <div class="author-name">${escapeHTML(msg.name)}</div>
+              </div>
+              <span class="whisper-tag">💌 悄悄話</span>
+            </div>
+            <div class="card-body">${escapeHTML(msg.content)}</div>
+            <div class="card-footer">${formatTime(msg.timestamp)}</div>
+          `;
+
+          // 點擊卡片觸發爆發愛心特效
+          card.addEventListener('click', (e) => popHearts(e));
+
+          containerEl.appendChild(card);
+        });
+
+        // 隱藏 Loading，顯示瀑布流
+        loadingEl.style.display = 'none';
+        containerEl.style.display = 'block';
+
+        // 顯示統計標籤
+        statsBadgeEl.textContent = `共收到 ${messages.length} 則溫馨留言`;
+        statsBadgeEl.style.display = 'inline-block';
+
+      } catch (err) {
+        console.error('Fetch 發生錯誤:', err);
+        loadingEl.innerHTML = `
+          <div class="error-box">
+            😿 載入留言失敗囉！<br>
+            <small>請確認網路連線或試算表公開權限設定。</small>
+          </div>
+        `;
+      }
+    }
+
+    /**
+     * 防止 XSS 攻擊
+     */
     function escapeHTML(str) {
       return str
         .replace(/&/g, "&amp;")
@@ -332,74 +504,37 @@
         .replace(/'/g, "&#039;");
     }
 
-    // ==========================================================================
-    // 3. 隨時間輪播特效 (Highlight Carousel)
-    // ==========================================================================
-    function startCarousel() {
-      const container = document.getElementById('cardContainer');
-      const cards = container.querySelectorAll('.card');
+    /**
+     * 卡片點擊爆發愛心粒子特效
+     */
+    function popHearts(e) {
+      const items = ['💖', '✨', '🌸', '💕', '⭐', '🎈'];
+      const count = 6;
 
-      if (cards.length === 0) return;
-
-      // 啟動容器的「有高亮卡片存在」類別，觸發其他卡片變暗/模糊的 CSS
-      container.classList.add('has-highlight');
-
-      function updateHighlight() {
-        // 移除所有卡片的高亮樣式
-        cards.forEach(card => card.classList.remove('highlight'));
-
-        // 為當前卡片加上高亮樣式
-        const activeCard = cards[currentIndex];
-        activeCard.classList.add('highlight');
-
-        // 計算下一次輪播的索引 (循環)
-        currentIndex = (currentIndex + 1) % cards.length;
-      }
-
-      // 立即執行第一次高亮
-      updateHighlight();
-
-      // 設定每 CONFIG.carouselInterval 秒執行一次切換
-      carouselTimer = setInterval(updateHighlight, CONFIG.carouselInterval);
-    }
-
-    // ==========================================================================
-    // 4. 初始化應用程式 (Fetch 資料)
-    // ==========================================================================
-    async function init() {
-      const loadingEl = document.getElementById('loading');
-
-      try {
-        const response = await fetch(CONFIG.csvUrl);
-        if (!response.ok) throw new Error('網路回應不成功');
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'heart-particle';
+        particle.textContent = items[Math.floor(Math.random() * items.length)];
         
-        const csvText = await response.text();
-        messages = parseCSV(csvText);
+        particle.style.left = `${e.clientX}px`;
+        particle.style.top = `${e.clientY}px`;
 
-        // 隱藏讀取動畫
-        loadingEl.style.display = 'none';
+        const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5);
+        const speed = 35 + Math.random() * 55;
+        const vx = Math.cos(angle) * speed;
+        const vy = Math.sin(angle) * speed;
 
-        if (messages.length > 0) {
-          renderCards(messages);
-          startCarousel(); // 資料載入並渲染完畢後，開始輪播特效
-        } else {
-          document.getElementById('cardContainer').innerHTML = `
-            <div style="text-align: center; grid-column: 1/-1; color: var(--text-muted);">
-              目前還沒有任何留言喔！
-            </div>`;
-        }
+        particle.style.setProperty('--vx', `${vx}px`);
+        particle.style.setProperty('--vy', `${vy}px`);
 
-      } catch (error) {
-        console.error('讀取 CSV 失敗:', error);
-        loadingEl.innerHTML = `
-          <div style="color: #c87575;">
-            讀取留言失敗，請確認網路連線或試算表權限。
-          </div>`;
+        document.body.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 800);
       }
     }
 
-    // 網頁準備就緒後執行
-    document.addEventListener('DOMContentLoaded', init);
+    // 頁面載入後自動啟動
+    document.addEventListener('DOMContentLoaded', fetchMessages);
   </script>
 </body>
 </html>
