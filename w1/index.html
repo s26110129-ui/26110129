@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人數位名片</title>
+    <!-- 載入 FontAwesome 圖示庫 (用於 Instagram 與 Email 圖示) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --------------------------------------------------
+           CSS 樣式區塊 (寫在 <style> 標籤內)
+        -------------------------------------------------- */
+
+        /* 全局基礎重置 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+
+        /* 畫面整體置中與馬卡龍粉嫩漸層背景 */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 馬卡龍粉 + 柔棉紫 漸層 */
+            background: linear-gradient(135deg, #FFD1DC 0%, #E8DFF5 100%);
+            padding: 20px;
+        }
+
+        /* 現代感卡片主體 + 微陰影 */
+        .card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 320px;
+            padding: 35px 25px;
+            border-radius: 24px;
+            text-align: center;
+            /* 現代感的柔和微陰影 (Soft Shadow) */
+            box-shadow: 0 15px 35px rgba(220, 160, 180, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* 滑鼠移到卡片上的微上浮效果 */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(220, 160, 180, 0.35);
+        }
+
+        /* 圓形大頭照片 */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            border: 3px solid #FFF0F5;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 名字樣式 */
+        .name {
+            font-size: 1.4rem;
+            color: #4A4A4A;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* 一行簡短自我介紹 */
+        .bio {
+            font-size: 0.9rem;
+            color: #7D7D7D;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* 按鈕容器（垂直排列） */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* 按鈕通用基礎樣式 */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 50px; /* 圓角膠囊形狀 */
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Instagram 馬卡龍粉紅按鈕 */
+        .btn-instagram {
+            background-color: #FFECF0;
+            color: #E05275;
+        }
+
+        .btn-instagram:hover {
+            background-color: #E05275;
+            color: #ffffff;
+            box-shadow: 0 6px 15px rgba(224, 82, 117, 0.3);
+        }
+
+        /* Email 馬卡龍粉藍/紫按鈕 */
+        .btn-email {
+            background-color: #F0F4FF;
+            color: #5C7AEA;
+        }
+
+        .btn-email:hover {
+            background-color: #5C7AEA;
+            color: #ffffff;
+            box-shadow: 0 6px 15px rgba(92, 122, 234, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --------------------------------------------------
+         HTML 內容區塊
+    -------------------------------------------------- -->
+    <div class="card">
+        <!-- 1. 大頭照片 -->
+        <img class="avatar" src="https://i.postimg.cc/RhwbTyp9/62F5A081-CB79-41FF-BB6A-19F2ABA56E11.jpg" alt="大頭照">
+
+        <!-- 2. 名字與簡短自我介紹 -->
+        <h1 class="name">許舒禹</h1>
+        <p class="bio">一名熱愛視覺與色彩的設計新手，正在用設計探索生活。</p>
+
+        <!-- 3. Instagram 與 Email 按鈕 -->
+        <div class="button-group">
+            <a href="https://instagram.com" target="_blank" class="btn btn-instagram">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            
+            <a href="mailto:your-email@example.com" class="btn btn-email">
+                <i class="fa-regular fa-envelope"></i> Email
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
